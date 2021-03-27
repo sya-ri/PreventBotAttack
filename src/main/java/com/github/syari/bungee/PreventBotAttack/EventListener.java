@@ -1,4 +1,4 @@
-package com.github.syari.bungee.ipblacklist;
+package com.github.syari.bungee.PreventBotAttack;
 
 import net.md_5.bungee.api.connection.*;
 import net.md_5.bungee.api.event.*;

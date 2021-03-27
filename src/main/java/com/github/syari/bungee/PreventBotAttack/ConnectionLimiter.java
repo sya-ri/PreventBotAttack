@@ -1,4 +1,4 @@
-package com.github.syari.bungee.ipblacklist;
+package com.github.syari.bungee.PreventBotAttack;
 
 import org.jetbrains.annotations.*;
 import java.util.*;

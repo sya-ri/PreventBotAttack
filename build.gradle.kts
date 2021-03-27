@@ -21,6 +21,6 @@ dependencies {
 configure<BungeePluginDescription> {
     name = project.name
     version = project.version.toString()
-    main = "com.github.syari.bungee.ipblacklist.Main"
+    main = "com.github.syari.bungee.PreventBotAttack.Main"
     author = "sya_ri"
 }
