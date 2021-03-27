@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.*;
 public class ConnectionLimiter {
     private final Map<String, AtomicInteger> connections = new ConcurrentHashMap<>();
 
-    public boolean checkLimit(@NotNull String ip) {
+    public void updateConnectionCount(@NotNull String ip) {
         int cps = Main.getSettings().getConnectionPerSecond();
         AtomicInteger counter;
         if (!connections.containsKey(ip)) {
@@ -18,7 +18,9 @@ public class ConnectionLimiter {
         } else {
             counter = connections.get(ip);
         }
-        return cps < counter.incrementAndGet();
+        if (cps < counter.incrementAndGet()) {
+            Main.getBlackList().add(ip);
+        }
     }
 
     public void init() {

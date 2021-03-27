@@ -11,11 +11,14 @@ public class EventListener implements Listener {
         PendingConnection connection = event.getConnection();
         String address = connection.getSocketAddress().toString();
         String ip = address.substring(1, address.indexOf(':'));
-        if (Main.getConnectionLimiter().checkLimit(ip)) {
+        ConnectionLimiter connectionLimiter = Main.getConnectionLimiter();
+        if (Main.getBlackList().contains(ip)) {
             connection.disconnect();
             if (Main.getSettings().isShowDisconnectLog()) {
                 System.out.println("[" + address + "] <-> Disconnected by ConnectionLimiter");
             }
+        } else {
+            connectionLimiter.updateConnectionCount(ip);
         }
     }
 }

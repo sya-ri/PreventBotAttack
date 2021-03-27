@@ -7,6 +7,7 @@ public class Main extends Plugin {
     private static Plugin instance;
     private static Settings settings;
     private static ConnectionLimiter connectionLimiter;
+    private static BlackList blackList;
 
     @Override
     public void onEnable() {
@@ -20,6 +21,7 @@ public class Main extends Plugin {
         }
         connectionLimiter = new ConnectionLimiter();
         connectionLimiter.init();
+        blackList = new BlackList();
     }
 
     public static Plugin getInstance() {
@@ -32,5 +34,9 @@ public class Main extends Plugin {
 
     public static ConnectionLimiter getConnectionLimiter() {
         return connectionLimiter;
+    }
+
+    public static BlackList getBlackList() {
+        return blackList;
     }
 }
