@@ -13,14 +13,16 @@ public class Settings extends YamlConfig {
     private int connectionPerSecond;
     private boolean showDisconnectLog;
     private String onAddBlackListCommand;
+    private String onRemoveBlackListCommand;
     private long commandTimeOut;
 
     @Override
     public void load() throws IOException {
         super.load();
         connectionPerSecond = config.getInt("limit.cps", 10);
-        showDisconnectLog = config.getBoolean("debug.disconnect", false);
-        onAddBlackListCommand = config.getString("command.blacklist.add", "");
+        showDisconnectLog = config.getBoolean("debug.disconnect");
+        onAddBlackListCommand = config.getString("command.blacklist.add");
+        onRemoveBlackListCommand = config.getString("command.blacklist.remove");
         commandTimeOut = config.getLong("command.timeout");
     }
 
@@ -34,6 +36,10 @@ public class Settings extends YamlConfig {
 
     public String getOnAddBlackListCommand() {
         return onAddBlackListCommand;
+    }
+
+    public String getOnRemoveBlackListCommand() {
+        return onRemoveBlackListCommand;
     }
 
     public long getCommandTimeOut() {

@@ -23,10 +23,24 @@ public class BlackListCommand extends Command {
                     } else {
                         String ip = args[1];
                         if (blackList.contains(ip)) {
-                            sender.sendMessage(new ComponentBuilder("Already added to the blacklist: " + ip).color(ChatColor.RED).create());
+                            sender.sendMessage(new ComponentBuilder("Already added to blacklist: " + ip).color(ChatColor.RED).create());
                         } else {
                             blackList.add(ip);
                             sender.sendMessage(new ComponentBuilder("Add to blackList: " + ip).color(ChatColor.GREEN).create());
+                        }
+                    }
+                    break;
+                }
+                case "remove": {
+                    if (length < 2) {
+                        sender.sendMessage(new ComponentBuilder("Enter the IP, such as 0.0.0.0").color(ChatColor.RED).create());
+                    } else {
+                        String ip = args[1];
+                        if (blackList.contains(ip)) {
+                            blackList.remove(ip);
+                            sender.sendMessage(new ComponentBuilder("Remove from blacklist: " + ip).color(ChatColor.GREEN).create());
+                        } else {
+                            sender.sendMessage(new ComponentBuilder("Does not exist in blacklist: " + ip).color(ChatColor.RED).create());
                         }
                     }
                     break;
@@ -41,6 +55,7 @@ public class BlackListCommand extends Command {
     private void sendHelp(CommandSender sender) {
         String message = "Command List: /blacklist\n" +
                 "/blacklist add <IP> : Add IP to blacklist\n" +
+                "/blacklist remove <IP> : Remove IP from blacklist\n" +
                 "/blacklist help : Show command help";
         sender.sendMessage(new ComponentBuilder(message).color(ChatColor.AQUA).create());
     }

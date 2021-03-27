@@ -5,4 +5,5 @@ debug:
 command: # Run System Command
   blacklist:
     add: "" # On Add BlackList. variable: (%ip% -> 0.0.0.0)
+    remove: "" # On Remove BlackList. variable: (%ip% -> 0.0.0.0)
   timeout: 100 # Command TimeOut: e.g. 100 ms

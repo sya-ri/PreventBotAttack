@@ -13,6 +13,8 @@ public class BlackList extends YamlConfig {
         super("blacklist.yml");
     }
 
+    private static final Settings settings = Main.getSettings();
+
     private List<String> list;
 
     @Override
@@ -31,10 +33,26 @@ public class BlackList extends YamlConfig {
         return list.contains(ip);
     }
 
+    public void add(@NotNull String ip) {
+        if (!list.contains(ip)) {
+            list.add(ip);
+            saveAfter100ms();
+            String command = settings.getOnAddBlackListCommand();
+            invokeCommandIfNotEmpty(command, ip);
+        }
+    }
+
+    public void remove(@NotNull String ip) {
+        if (list.remove(ip)) {
+            saveAfter100ms();
+            String command = settings.getOnRemoveBlackListCommand();
+            invokeCommandIfNotEmpty(command, ip);
+        }
+    }
+
     private @Nullable ScheduledTask task;
 
-    public void add(@NotNull String ip) {
-        list.add(ip);
+    private void saveAfter100ms() {
         if (task == null) {
             Plugin plugin = Main.getInstance();
             task = plugin.getProxy().getScheduler().schedule(plugin, () -> {
@@ -46,8 +64,9 @@ public class BlackList extends YamlConfig {
                 }
             }, 100, TimeUnit.MILLISECONDS);
         }
-        Settings settings = Main.getSettings();
-        String command = settings.getOnAddBlackListCommand();
+    }
+
+    private void invokeCommandIfNotEmpty(@NotNull String command, @NotNull String ip) {
         if (!command.isEmpty()) {
             try {
                 SystemCommand.invoke(command.replace("%ip%", ip), settings.getCommandTimeOut());
