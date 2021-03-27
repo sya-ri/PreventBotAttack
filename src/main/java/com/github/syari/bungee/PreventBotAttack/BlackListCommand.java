@@ -3,6 +3,7 @@ package com.github.syari.bungee.PreventBotAttack;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.*;
 import net.md_5.bungee.api.plugin.*;
+import java.util.*;
 
 public class BlackListCommand extends Command {
     public BlackListCommand() {
@@ -45,6 +46,16 @@ public class BlackListCommand extends Command {
                     }
                     break;
                 }
+                case "list": {
+                    StringBuilder builder = new StringBuilder();
+                    List<String> list = blackList.getList();
+                    builder.append("IP Blacklist:");
+                    for (String ip : list) {
+                        builder.append("\n").append("- ").append(ip);
+                    }
+                    sender.sendMessage(new ComponentBuilder(builder.toString()).color(ChatColor.AQUA).create());
+                    break;
+                }
                 default: {
                     sendHelp(sender);
                 }
@@ -56,6 +67,7 @@ public class BlackListCommand extends Command {
         String message = "Command List: /blacklist\n" +
                 "/blacklist add <IP> : Add IP to blacklist\n" +
                 "/blacklist remove <IP> : Remove IP from blacklist\n" +
+                "/blacklist list : Show blacklist\n" +
                 "/blacklist help : Show command help";
         sender.sendMessage(new ComponentBuilder(message).color(ChatColor.AQUA).create());
     }

@@ -50,6 +50,10 @@ public class BlackList extends YamlConfig {
         }
     }
 
+    public List<String> getList() {
+        return Collections.unmodifiableList(list);
+    }
+
     private @Nullable ScheduledTask task;
 
     private void saveAfter100ms() {
