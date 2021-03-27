@@ -72,11 +72,7 @@ public class BlackList extends YamlConfig {
 
     private void invokeCommandIfNotEmpty(@NotNull String command, @NotNull String ip) {
         if (!command.isEmpty()) {
-            try {
-                SystemCommand.invoke(command.replace("%ip%", ip), settings.getCommandTimeOut());
-            } catch (InterruptedException | IOException ex) {
-                ex.printStackTrace();
-            }
+            SystemCommand.invoke(command.replace("%ip%", ip), settings.getCommandTimeOut());
         }
     }
 }
