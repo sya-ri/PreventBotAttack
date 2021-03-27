@@ -16,12 +16,13 @@ public class Main extends Plugin {
         try {
             settings = new Settings();
             settings.load();
+            blackList = new BlackList();
+            blackList.load();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         connectionLimiter = new ConnectionLimiter();
         connectionLimiter.init();
-        blackList = new BlackList();
     }
 
     public static Plugin getInstance() {
