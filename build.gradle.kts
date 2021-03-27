@@ -15,6 +15,7 @@ repositories {
 
 dependencies {
     implementation("net.md-5:bungeecord-api:1.16-R0.5-SNAPSHOT")
+    implementation("org.jetbrains:annotations:20.1.0")
 }
 
 configure<BungeePluginDescription> {
