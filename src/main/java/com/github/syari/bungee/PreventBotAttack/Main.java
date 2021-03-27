@@ -12,7 +12,9 @@ public class Main extends Plugin {
     @Override
     public void onEnable() {
         instance = this;
-        getProxy().getPluginManager().registerListener(this, new EventListener());
+        PluginManager pluginManager = getProxy().getPluginManager();
+        pluginManager.registerListener(this, new EventListener());
+        pluginManager.registerCommand(this, new BlackListCommand());
         try {
             settings = new Settings();
             settings.load();
