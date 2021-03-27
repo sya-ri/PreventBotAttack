@@ -2,3 +2,7 @@ limit:
   cps: 10 # Connection Per Second
 debug:
   disconnect: false # console log: "[/0.0.0.0:00000] <-> Disconnected by ConnectionLimiter"
+command: # Run System Command
+  blacklist:
+    add: "" # On Add BlackList. variable: (%ip% -> 0.0.0.0)
+  timeout: 100 # Command TimeOut: e.g. 100 ms

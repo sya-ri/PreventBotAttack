@@ -2,6 +2,7 @@ package com.github.syari.bungee.PreventBotAttack;
 
 import com.github.syari.bungee.PreventBotAttack.api.*;
 import net.md_5.bungee.api.plugin.*;
+import org.jetbrains.annotations.*;
 import java.io.*;
 
 public class Settings extends YamlConfig {
@@ -11,12 +12,16 @@ public class Settings extends YamlConfig {
 
     private int connectionPerSecond;
     private boolean showDisconnectLog;
+    private String onAddBlackListCommand;
+    private long commandTimeOut;
 
     @Override
     public void load() throws IOException {
         super.load();
         connectionPerSecond = config.getInt("limit.cps", 10);
         showDisconnectLog = config.getBoolean("debug.disconnect", false);
+        onAddBlackListCommand = config.getString("command.blacklist.add", "");
+        commandTimeOut = config.getLong("command.timeout");
     }
 
     public int getConnectionPerSecond() {
@@ -25,5 +30,13 @@ public class Settings extends YamlConfig {
 
     public boolean isShowDisconnectLog() {
         return showDisconnectLog;
+    }
+
+    public String getOnAddBlackListCommand() {
+        return onAddBlackListCommand;
+    }
+
+    public long getCommandTimeOut() {
+        return commandTimeOut;
     }
 }
