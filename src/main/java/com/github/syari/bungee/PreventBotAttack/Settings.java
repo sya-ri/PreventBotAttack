@@ -5,8 +5,8 @@ import net.md_5.bungee.api.plugin.*;
 import java.io.*;
 
 public class Settings extends YamlConfig {
-    public Settings(Plugin plugin) throws IOException {
-        super(plugin, "settings.yml");
+    public Settings() throws IOException {
+        super("settings.yml");
     }
 
     private int connectionPerSecond;

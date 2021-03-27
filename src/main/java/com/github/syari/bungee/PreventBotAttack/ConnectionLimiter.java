@@ -1,5 +1,6 @@
 package com.github.syari.bungee.PreventBotAttack;
 
+import net.md_5.bungee.api.plugin.*;
 import org.jetbrains.annotations.*;
 import java.util.*;
 import java.util.concurrent.*;
@@ -18,5 +19,10 @@ public class ConnectionLimiter {
             counter = connections.get(ip);
         }
         return cps < counter.incrementAndGet();
+    }
+
+    public void init() {
+        Plugin plugin = Main.getInstance();
+        plugin.getProxy().getScheduler().schedule(plugin, connections::clear, 0, 1, TimeUnit.SECONDS);
     }
 }

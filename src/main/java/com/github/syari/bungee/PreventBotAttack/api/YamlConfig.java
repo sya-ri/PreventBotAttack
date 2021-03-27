@@ -1,5 +1,6 @@
 package com.github.syari.bungee.PreventBotAttack.api;
 
+import com.github.syari.bungee.PreventBotAttack.*;
 import net.md_5.bungee.api.plugin.*;
 import net.md_5.bungee.config.*;
 import org.jetbrains.annotations.*;
@@ -15,8 +16,8 @@ public class YamlConfig {
     @NotNull protected final File file;
     protected Configuration config;
 
-    public YamlConfig(@NotNull Plugin plugin, @NotNull String fileName) {
-        this.plugin = plugin;
+    public YamlConfig(@NotNull String fileName) {
+        this.plugin = Main.getInstance();
         this.fileName = fileName;
         folder = plugin.getDataFolder();
         file = new File(folder, fileName);
