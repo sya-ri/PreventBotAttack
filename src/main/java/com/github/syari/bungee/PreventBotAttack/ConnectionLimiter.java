@@ -11,12 +11,10 @@ public class ConnectionLimiter {
 
     public void updateConnectionCount(@NotNull String ip) {
         int cps = Main.getSettings().getConnectionPerSecond();
-        AtomicInteger counter;
-        if (!connections.containsKey(ip)) {
+        AtomicInteger counter = connections.get(ip);
+        if (counter == null) {
             counter = new AtomicInteger();
             connections.put(ip, counter);
-        } else {
-            counter = connections.get(ip);
         }
         if (cps < counter.incrementAndGet()) {
             Main.getBlackList().add(ip);
